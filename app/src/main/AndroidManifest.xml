@@ -45,6 +45,11 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.SEND" />
+                <data android:mimeType="image/*"/>
+                <category android:name="android.intent.category.DEFAULT" />
+
             </intent-filter>
 
             <meta-data

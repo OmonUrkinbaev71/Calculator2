@@ -126,6 +126,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         sharedPreferences = getSharedPreferences("LastInput", MODE_PRIVATE);
+
+        Intent broadcastIntent = getIntent();
+        String action = broadcastIntent.getAction();
+        String type = broadcastIntent.getType();
+
+        if(Intent.ACTION_SEND.equals(action) && type != null){
+            imageViewForSmileyFace.setImageURI(broadcastIntent.getParcelableExtra(Intent.EXTRA_STREAM));
+        }
     }
 
     private void performReset(boolean doReset){

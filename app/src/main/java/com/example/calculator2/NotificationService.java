@@ -80,6 +80,9 @@ public class NotificationService extends Service {
                         e.printStackTrace();
                     }
 
+                    final Intent notificationIntent = new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0,notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT);
                     try {
                         String parsedDisplayResult = new JSONObject(displayResult)
                                 .getJSONObject("contents").getJSONArray("quotes")
@@ -90,7 +93,9 @@ public class NotificationService extends Service {
                                 .setSmallIcon(R.drawable.ic_baseline_add_reaction_24)
                                 .setContentTitle("Test Notification")
                                 .setContentText(displayResult)
-                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setAutoCancel(true)
+                                .setContentIntent(pendingIntent); //notifications disappears from the panel after we click on it
 
                         if(counter >= 3){
                             //Step 3: Showing the notification
